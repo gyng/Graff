@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Graff</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="stylesheets/global/global.css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="console"></div>
+
+        <div id="tools" class="flex">
+            <div id="lineStyles" class="toolkit">
+                <div class="tool lineStyleOption" value="line-solid" title="Solid"><div id="lineStyleSolidIcon" class="sprite"></div></div>
+                <div class="tool lineStyleOption" value="line-squiggly" title="Squiggle"><div id="lineStyleSquiggleIcon" class="sprite"></div></div>
+                <div class="tool lineStyleOption" value="line-flower" title="Burst"><div id="lineStyleBurstIcon" class="sprite"></div></div>
+                <div class="tool lineStyleOption" value="line-3d" title="3D"><div id="lineStyle3dIcon" class="sprite"></div></div>
+            </div>
+
+            <div id="lineColour" class="toolkit">
+                <div class="tool lineColourOption" value="colour-black" title="Black"><div id="lineColourBlackIcon" class="sprite"></div></div>
+                <div class="tool lineColourOption" value="colour-rainbow" title="Rainbow"><div id="lineColourRainbowIcon" class="sprite"></div></div>
+            </div>
+
+            <div id="clear" class="toolkit">
+                <div class="tool clearOption" value="clear" title="Clear"><div id="clearIcon" class="sprite"></div></div>
+            </div>
+
+            <div id="toolWordmark" title="owlsux">graff</div>
+        </div>
+
+        <canvas id="mainCanvas">
+            <p>Graff requires browser canvas support. The latest versions of Firefox, Opera, Chrome, Safari and IE should work with Graff.</p>
+        </canvas>
+
+        <!-- JS -->
+        <script type="text/javascript" src="scripts/main.js"></script>
+    </body>
+</html>
