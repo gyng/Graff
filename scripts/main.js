@@ -10,7 +10,13 @@ $(document).ready(function() {
 });
 
 $(window).resize(function() {
+    var dummyCanvas = document.createElement('canvas');
+    var dummyContext = dummyCanvas.getContext('2d');
+    dummyCanvas.width = canvas.canvas.width;
+    dummyCanvas.height = canvas.canvas.height;
+    dummyContext.drawImage(canvas.canvas, 0, 0);
     canvas.setSize();
+    canvas.context.drawImage(dummyCanvas, 0, 0);
 });
 
 /*
