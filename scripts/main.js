@@ -22,6 +22,8 @@ $(window).resize(function() {
     canvas.context.drawImage(dummyCanvas, 0, 0);
 });
 
+
+
 /*
  * Mouse events
  */
@@ -35,6 +37,7 @@ $(document).mousemove(function(e) {
 });
 
 $('#mainCanvas').mousedown(function() {
+    //if (e.mozPressure != undefined) { canvas.lineWidth = canvas.defaultLineWidth * mozPressure * 2; }
     mouse.mouseDown = true;
 });
 
@@ -153,6 +156,7 @@ function Canvas() {
     //this.fillStyle = "#000";
     this.strokeStyleOption = "black"; // Styling the actual line itself
     this.lineStyleOption = "line"; // Type of line to draw
+    this.defaultLineWidth = 2.0;
     this.lineWidth = 2.0;
     this.eraserSize = 30.0;
     var tempLineWidth;
