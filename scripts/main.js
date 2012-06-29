@@ -45,9 +45,15 @@ $(document).mouseup(function() {
 /*
  * User Interface
  */
-// Highlight active tool
-$('.tool').click(function() {
-    $('.tool').css("background-color", "rgba(0, 0, 0, 0.2)");
+// Highlight active tools
+$('#lineStyles .tool').click(function() {
+    $('#lineStyles .tool').css("background-color", "rgba(0, 0, 0, 0.2)");
+    $(this).css("background-color", "rgba(185, 185, 185, 1)");
+});
+
+$('#lineColour .tool').click(function() {
+    $('#lineColour .tool').css("background-color", "rgba(0, 0, 0, 0.2)");
+    $('#eraseButton').css("background-color", "rgba(0, 0, 0, 0.2)");
     $(this).css("background-color", "rgba(185, 185, 185, 1)");
 });
 
