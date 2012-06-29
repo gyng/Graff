@@ -80,12 +80,15 @@ $('.lineColourOption').click(function() {
     case "colour-rainbow":
         newColour = "rainbow";
         break;
+    case "colour-erase":
+        newColour = "erase";
+        break;
     default:
         newColour = "black";
         break;
     }
 
-    canvas.strokeStyleOption = newColour
+    canvas.strokeStyleOption = newColour;
 });
 
 $('.clearOption').click(function() {
@@ -105,6 +108,8 @@ function Canvas() {
     this.strokeStyleOption = "black"; // Styling the actual line itself
     this.lineStyleOption = "line"; // Type of line to draw
     this.lineWidth = 2.0;
+    this.eraserSize = 30.0;
+    var tempLineWidth;
 
     /*
      * initCanvas: Set proper canvas dimensions and obtain the context.
@@ -207,9 +212,19 @@ function Canvas() {
         case "rainbow":
             this.strokeStyle = "'hsl(' +  mouse.x + ', 100%,' + Math.floor(100 - mouse.y/windowHeight*100) + '%)'"
             break;
+        case "erase":
+            this.strokeStyle = "'rgba(0, 0, 0)'";
+            break;
         default:
             this.strokeStyle = "'rgb(0, 0, 0)'";
             break;
+        }
+
+        // Change composite operation if erasing
+        if (this.strokeStyleOption == "erase") {
+            this.context.globalCompositeOperation = "destination-out";
+            tempLineWidth = this.lineWidth;
+            this.lineWidth = this.eraserSize;
         }
 
         this.lastPos.x = x;
@@ -218,6 +233,12 @@ function Canvas() {
         this.context.lineWidth = this.lineWidth;
         this.context.strokeStyle = eval(this.strokeStyle);
         this.context.stroke();
+
+        // Restore composite operation if erasing
+        if (this.strokeStyleOption == "erase") {
+            this.context.globalCompositeOperation = "source-over";
+            this.lineWidth = tempLineWidth;
+        }
     }
 
     /*

@@ -108,4 +108,5 @@ html, body {
 #lineColourBlackIcon {width: 32px; height: 32px; background-position: -129px -0px; }
 #lineColourRainbowIcon {width: 32px; height: 32px; background-position: -43px -43px; }
 
+#eraseIcon { width: 32px; height: 32px; background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url('../../images/icons/erase.png'); }
 #clearIcon { width: 32px; height: 32px; background-position: -86px -86px; }
