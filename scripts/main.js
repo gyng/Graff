@@ -3,8 +3,8 @@ var mouse = new MouseStatus(); // Track mouse status
 var windowHeight = window.innerHeight;
 var windowWidth = window.innerWidth;
 var canvas; // Create drawing canvas
-var inactiveToolStyle = "rgba(0, 0, 0, 0.2)"
-var activeToolStyle = "rgba(185, 185, 185, 1)"
+var inactiveToolStyle = "rgba(0, 0, 0, 0.2)";
+var activeToolStyle = "rgba(185, 185, 185, 1)";
 
 $(document).ready(function() {
     $('.defaultTool').css("background-color", activeToolStyle);
@@ -44,6 +44,10 @@ $(document).mouseup(function() {
 });
 
 
+
+/*
+ * Touch events
+ */
 $(document).touchmove(function(e) {
     e.preventDefault();
     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
