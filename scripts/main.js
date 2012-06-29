@@ -45,10 +45,16 @@ $(document).mouseup(function() {
 /*
  * User Interface
  */
+// Highlight active tool
+$('.tool').click(function() {
+    $('.tool').css("background-color", "rgba(0, 0, 0, 0.2)");
+    $(this).css("background-color", "rgba(185, 185, 185, 1)");
+});
+
+// Map tools to internal option
 $('.lineStyleOption').click(function() {
     var newStyle;
 
-    // Map selected style to internal option
     switch($(this).attr("value")) {
     case "line-solid":
         newStyle = "line";
