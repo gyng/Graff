@@ -3,8 +3,11 @@ var mouse = new MouseStatus(); // Track mouse status
 var windowHeight = window.innerHeight;
 var windowWidth = window.innerWidth;
 var canvas; // Create drawing canvas
+var inactiveToolStyle = "rgba(0, 0, 0, 0.2)"
+var activeToolStyle = "rgba(185, 185, 185, 1)"
 
 $(document).ready(function() {
+    $('.defaultTool').css("background-color", activeToolStyle);
     canvas = new Canvas();
     canvas.initCanvas();
 });
@@ -41,20 +44,42 @@ $(document).mouseup(function() {
 });
 
 
+$(document).touchmove(function(e) {
+    e.preventDefault();
+    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+    mouse.x = touch.pageX;
+    mouse.y = touch.pageY;
+
+    if (mouse.touchDown) {
+        canvas.draw(new Point(touch.pageX, touch.pageY));
+    }
+});
+
+$('#mainCanvas').touchstart(function() {
+    mouse.touchDown = true;
+});
+
+$(document).touchend(function() {
+    mouse.touchDown = false;
+    canvas.lastPos = null; // Reset draw start point
+});
+
+
 
 /*
  * User Interface
  */
 // Highlight active tools
+
 $('#lineStyles .tool').click(function() {
-    $('#lineStyles .tool').css("background-color", "rgba(0, 0, 0, 0.2)");
-    $(this).css("background-color", "rgba(185, 185, 185, 1)");
+    $('#lineStyles .tool').css("background-color", inactiveToolStyle);
+    $(this).css("background-color", activeToolStyle);
 });
 
 $('#lineColour .tool').click(function() {
-    $('#lineColour .tool').css("background-color", "rgba(0, 0, 0, 0.2)");
-    $('#eraseButton').css("background-color", "rgba(0, 0, 0, 0.2)");
-    $(this).css("background-color", "rgba(185, 185, 185, 1)");
+    $('#lineColour .tool').css("background-color", inactiveToolStyle);
+    $('#eraseButton').css("background-color", inactiveToolStyle);
+    $(this).css("background-color", activeToolStyle);
 });
 
 // Export button
@@ -282,6 +307,7 @@ function Point(x, y) {
  */
 function MouseStatus() {
     this.mouseDown;
+    this.touchDown;
     this.x;
     this.y;
 }
