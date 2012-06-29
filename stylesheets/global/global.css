@@ -22,7 +22,7 @@ html, body {
  */
 #tools {
     position: fixed;
-    top: 40%;
+    top: 20%;
     left: 3%;
     padding: 0.5em;
     background: rgba(0, 0, 0, 0.5);
@@ -68,14 +68,14 @@ html, body {
 }
 
 .tool:hover {
-    background: rgba(180, 180, 180, 1);
+    background: rgba(180, 180, 180, 1) !important;
     -webkit-transition: width 0.7s ease-out;
     transition: width 0.7s ease-out;
     cursor: pointer;
 }
 
 .tool:active {
-    background: rgba(220, 220, 220, 1);
+    background: rgba(220, 220, 220, 1) !important;
     border: solid 1px #ff9900;
     -webkit-transition: width 0.7s ease-out;
     transition: width 0.7s ease-out;
@@ -109,4 +109,5 @@ html, body {
 #lineColourRainbowIcon {width: 32px; height: 32px; background-position: -43px -43px; }
 
 #eraseIcon { width: 32px; height: 32px; background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url('../../images/icons/erase.png'); }
+#exportIcon { width: 32px; height: 32px; background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url('../../images/icons/export.png'); }
 #clearIcon { width: 32px; height: 32px; background-position: -86px -86px; }

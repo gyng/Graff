@@ -57,6 +57,11 @@ $('#lineColour .tool').click(function() {
     $(this).css("background-color", "rgba(185, 185, 185, 1)");
 });
 
+// Export button
+$('#exportButton').click(function() {
+    window.open(canvas.canvas.toDataURL('image/png', ''));
+});
+
 // Map tools to internal option
 $('.lineStyleOption').click(function() {
     var newStyle;
