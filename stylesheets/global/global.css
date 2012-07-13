@@ -5,6 +5,18 @@ html, body {
     padding: 0;
 }
 
+/* Hide Wacom embed container */
+#wacomPluginWrapper {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
 /* Console */
 #console {
     position: fixed;
@@ -19,6 +31,7 @@ html, body {
  * .flex > div - Tool buttons
  * .toolkit - Collection of tools, tool category
  * #toolWordmark - The wordmark.
+ * #wacomSupportIndicator - Is visible when Wacom support is detected
  */
 #tools {
     position: fixed;
@@ -85,6 +98,12 @@ html, body {
     margin: 8px 0 0 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.7em;
+}
+
+#wacomSupportIndicator {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.5em;
 }
 
 /* Canvas */

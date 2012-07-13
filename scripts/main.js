@@ -1,3 +1,18 @@
+/* graff - main.js
+ *
+ * 1. Globals, Initialisation, Resize
+ * 2. Mouse Events
+ * 3. Touch Events
+ * 4. User Interface
+ * 5. Canvas
+ * 6. Point
+ * 7. Mouse Status
+ * 8. Wacom Plugin Loader
+ * 9. Dev Logger
+ */
+
+
+
 var logger = new Logger(5, true); // Create a debug logger
 var mouse = new MouseStatus(); // Track mouse status
 var windowHeight = window.innerHeight;
@@ -5,11 +20,15 @@ var windowWidth = window.innerWidth;
 var canvas; // Create drawing canvas
 var inactiveToolStyle = "rgba(0, 0, 0, 0.2)";
 var activeToolStyle = "rgba(185, 185, 185, 1)";
+var wacomPlugin;
+
+
 
 $(document).ready(function() {
     $('.defaultTool').css("background-color", activeToolStyle);
     canvas = new Canvas();
     canvas.initCanvas();
+    loadWacom();
 });
 
 $(window).resize(function() {
@@ -32,12 +51,17 @@ $(document).mousemove(function(e) {
     mouse.y = e.pageY;
 
     if (mouse.mouseDown) {
+        // Wacom webplugin features
+        if (wacomPlugin != undefined) {
+            var pressure = wacomPlugin.pressure;
+            var tilt = Math.pow((Math.abs(wacomPlugin.tiltX) + Math.abs(wacomPlugin.tiltY)), 2);
+            canvas.lineWidth = canvas.defaultLineWidth * (pressure * 2 + tilt) * 0.8;
+        }
         canvas.draw(new Point(e.pageX, e.pageY));
     }
 });
 
 $('#mainCanvas').mousedown(function() {
-    //if (e.mozPressure != undefined) { canvas.lineWidth = canvas.defaultLineWidth * mozPressure * 2; }
     mouse.mouseDown = true;
 });
 
@@ -76,8 +100,8 @@ $(document).touchend(function() {
 /*
  * User Interface
  */
-// Highlight active tools
 
+// Highlight active tools
 $('#lineStyles .tool').click(function() {
     $('#lineStyles .tool').css("background-color", inactiveToolStyle);
     $(this).css("background-color", activeToolStyle);
@@ -143,6 +167,18 @@ $('.lineColourOption').click(function() {
 $('.clearOption').click(function() {
     canvas.clear();
 });
+
+/*
+ * wacomSupportIndicator - Sets UI indicator for Wacom support
+ */
+function wacomSupportIndicator() {
+    if (wacomPlugin != undefined) {
+        $('#wacomSupportIndicator').css('display', 'block');
+    }
+}
+
+// Hack for chrome changing cursor to text-select on drag
+document.onselectstart = function() { return false; };
 
 
 
@@ -319,6 +355,35 @@ function MouseStatus() {
     this.x;
     this.y;
 }
+
+
+
+/*
+ * loadWacom: Loader for Wacom plugin. Only loads the plugin if it is detected (application/x-wacom-tablet).
+ *            Done in such a way to suppress "Additional plugins are required" infobox when user does not have required plugin installed.
+ */
+function loadWacom() {
+    var type = "application/x-wacom-tablet";
+    var plugin;
+
+    if (navigator && navigator.mimeTypes){
+       var mt = navigator.mimeTypes;
+       for (var i = 0; i < mt.length; i++){
+          if (mt[i].type == type) {
+             plugin = mt[i].enabledPlugin;
+             if (plugin) break;
+          }
+       }
+    }
+    if (plugin) {
+      $('#wacomPluginWrapper').html('<embed name="wacom-plugin" id="wacom-plugin" type="application/x-wacom-tablet" HIDDEN="TRUE"></embed>');
+      wacomPlugin = document.getElementById('wacom-plugin'); // Load Wacom web plugin
+    }
+
+    wacomSupportIndicator();
+}
+
+
 
 /*
  * Logger: A really simply logger.
