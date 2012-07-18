@@ -311,6 +311,8 @@ function Canvas() {
             this.context.globalCompositeOperation = "destination-out";
             tempLineWidth = this.lineWidth;
             this.lineWidth = this.eraserSize;
+        } else {
+            this.lineWidth = this.defaultLineWidth;
         }
 
         this.lastPos.x = x;
