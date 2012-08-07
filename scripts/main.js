@@ -55,7 +55,7 @@ $(document).mousemove(function(e) {
             var tilt = Math.pow((Math.abs(wacomPlugin.tiltX) + Math.abs(wacomPlugin.tiltY)), 2);
             canvas.lineWidth = canvas.defaultLineWidth * (pressure * 2 + tilt) * 0.8;
         }
-        canvas.draw(new Point(e.pageX, e.pageY));
+        canvas.draw(e.pageX, e.pageY);
     }
 });
 
@@ -80,7 +80,7 @@ $(document).touchmove(function(e) {
     mouse.y = touch.pageY;
 
     if (mouse.touchDown) {
-        canvas.draw(new Point(touch.pageX, touch.pageY));
+        canvas.draw(touch.pageX, touch.pageY);
     }
 });
 
@@ -219,9 +219,9 @@ function Canvas() {
      * draw: draws a line from the current position to the new position.
      * point: A Point object with information of where to draw to.
      */
-    this.draw = function(point) {
-        var x = point.x
-        var y = point.y
+    this.draw = function(pointX, pointY) {
+        var x = pointX
+        var y = pointY
 
         if (this.lastPos == null) {
             this.lastPos = new Point(x, y);
