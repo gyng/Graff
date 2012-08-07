@@ -367,17 +367,18 @@ function loadWacom() {
     var plugin;
 
     if (navigator && navigator.mimeTypes){
-       var mt = navigator.mimeTypes;
-       for (var i = 0; i < mt.length; i++){
-          if (mt[i].type == type) {
-             plugin = mt[i].enabledPlugin;
-             if (plugin) break;
-          }
-       }
+        var mt = navigator.mimeTypes;
+        for (var i = 0; i < mt.length; i++){
+            if (mt[i].type == type) {
+                plugin = mt[i].enabledPlugin;
+                if (plugin) break;
+            }
+        }
     }
+
     if (plugin) {
-      $('#wacomPluginWrapper').html('<embed name="wacom-plugin" id="wacom-plugin" type="application/x-wacom-tablet" HIDDEN="TRUE"></embed>');
-      wacomPlugin = document.getElementById('wacom-plugin'); // Load Wacom web plugin
+        $('#wacomPluginWrapper').html('<embed name="wacom-plugin" id="wacom-plugin" type="application/x-wacom-tablet" HIDDEN="TRUE"></embed>');
+        wacomPlugin = document.getElementById('wacom-plugin'); // Load Wacom web plugin
     }
 
     wacomSupportIndicator();
