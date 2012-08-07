@@ -8,12 +8,10 @@
  * 6. Point
  * 7. Mouse Status
  * 8. Wacom Plugin Loader
- * 9. Dev Logger
  */
 
 
 
-var logger = new Logger(5, true); // Create a debug logger
 var mouse = new MouseStatus(); // Track mouse status
 var windowHeight = window.innerHeight;
 var windowWidth = window.innerWidth;
@@ -383,42 +381,4 @@ function loadWacom() {
     }
 
     wacomSupportIndicator();
-}
-
-
-
-/*
- * Logger: A really simply logger.
- * level: What level the logger is. Log events below this level will be ignored.
- * exclusive: Whether to only print events for level.
- */
-function Logger(level, exclusive) {
-    this.logLevel = level;
-    this.logCount = 0;
-    this.maxConsoleEvents = 10;
-    this.exclusive = exclusive;
-    // this.logs = new Array();
-
-    /*
-     * logEvent: Pushes the message to the console div.
-     * messageLevel: What logging level the message is.
-     * message: Log's content.
-     */
-    this.logEvent = function(messageLevel, message) {
-        if (this.logCount > this.maxConsoleEvents) this.clearConsole();
-
-        if (!exclusive && this.logLevel <= messageLevel ||
-            exclusive && this.logLevel == messageLevel) {
-            $('#console').append('<div class="logEvent">' + message + '</div>');
-            this.logCount += 1;
-        }
-    }
-
-    /*
-     * clearConsole: Does what it says. Clears div with id 'console'.
-     */
-    this.clearConsole = function() {
-        $('#console').html("");
-        this.logCount = 0;
-    }
 }

@@ -17,13 +17,6 @@ html, body {
     padding: 0;
 }
 
-/* Console */
-#console {
-    position: fixed;
-    top: 0;
-    left: 45%;
-}
-
 /* Toolbox
  *
  * #tools - Container for tools
