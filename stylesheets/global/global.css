@@ -95,6 +95,15 @@ html, body {
     padding: 12px;
 }
 
+.tool i {
+    font-size: 28px;
+    color: #333;
+}
+
+.activeTool {
+    background-color: #ddd;
+}
+
 #toolWordmark {
     margin: 8px 0 0 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -116,18 +125,3 @@ html, body {
 #mainCanvas:hover {
     cursor: crosshair;
 }
-
-/* Icons */
-.sprite { background: url(../../images/icons/sprites.png) no-repeat; }
-
-#lineStyleSolidIcon { width: 32px; height: 32px; background-position: -86px -43px; }
-#lineStyleSquiggleIcon { width: 32px; height: 32px; background-position: -86px -0px; }
-#lineStyleBurstIcon { width: 32px; height: 32px; background-position: -0px -86px; }
-#lineStyle3dIcon { width: 32px; height: 32px; background-position: -129px -43px; }
-
-#lineColourBlackIcon {width: 32px; height: 32px; background-position: -129px -0px; }
-#lineColourRainbowIcon {width: 32px; height: 32px; background-position: -43px -43px; }
-
-#eraseIcon { width: 32px; height: 32px; background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url('../../images/icons/erase.png'); }
-#exportIcon { width: 32px; height: 32px; background-size: 80%; background-position: center; background-repeat: no-repeat; background-image: url('../../images/icons/export.png'); }
-#clearIcon { width: 32px; height: 32px; background-position: -86px -86px; }

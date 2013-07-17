@@ -3,27 +3,28 @@
     <head>
         <title>Graff</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="stylesheets/global/global.css" />
+        <link rel="stylesheet" href="stylesheets/global/global.css">
+        <link rel="stylesheet" href="stylesheets/lib/font-awesome/font-awesome.min.css">
         <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
     </head>
     <body>
         <div id="tools" class="flex">
             <div id="lineStyles" class="toolkit">
-                <div class="tool lineStyleOption defaultTool" value="line-solid" title="Solid"><div id="lineStyleSolidIcon" class="sprite"></div></div>
-                <div class="tool lineStyleOption" value="line-squiggly" title="Squiggle"><div id="lineStyleSquiggleIcon" class="sprite"></div></div>
-                <div class="tool lineStyleOption" value="line-flower" title="Burst"><div id="lineStyleBurstIcon" class="sprite"></div></div>
-                <div class="tool lineStyleOption" value="line-3d" title="3D"><div id="lineStyle3dIcon" class="sprite"></div></div>
+                <div class="tool lineStyleOption defaultTool" value="line-solid" title="Solid"><i class="icon-pencil"></i></div>
+                <div class="tool lineStyleOption" value="line-squiggly" title="Squiggle"><i class="icon-asterisk"></i></div>
+                <div class="tool lineStyleOption" value="line-flower" title="Burst"><i class="icon-sun"></i></div>
+                <div class="tool lineStyleOption" value="line-3d" title="3D"><i class="icon-inbox"></i></div>
             </div>
 
             <div id="lineColour" class="toolkit">
-                <div class="tool lineColourOption defaultTool" value="colour-black" title="Black"><div id="lineColourBlackIcon" class="sprite"></div></div>
-                <div class="tool lineColourOption" value="colour-rainbow" title="Rainbow"><div id="lineColourRainbowIcon" class="sprite"></div></div>
-                <div id="eraseButton" class="tool lineColourOption" value="colour-erase" title="Erase"><div id="eraseIcon"></div></div>
+                <div class="tool lineColourOption defaultTool" value="colour-black" title="Black"><i class="icon-sign-blank"></i></div>
+                <div class="tool lineColourOption" value="colour-rainbow" title="Rainbow"><i class="icon-heart-empty"></i></div>
+                <div id="eraseButton" class="tool lineColourOption" value="colour-erase" title="Erase"><i class="icon-eraser"></i></div>
             </div>
 
             <div id="clear" class="toolkit">
-                <div id="exportButton" class="tool exportOption" value="export" title="Export"><div id="exportIcon"></div></div>
-                <div class="tool clearOption" value="clear" title="Clear"><div id="clearIcon" class="sprite"></div></div>
+                <div id="exportButton" class="tool exportOption" value="export" title="Export"><i class="icon-save"></i></div>
+                <div class="tool clearOption" value="clear" title="Clear"><i class="icon-trash"></i></div>
             </div>
 
             <div id="wacomSupportIndicator" title="Wacom Plugin Detection">Wacom<br>detected</div>

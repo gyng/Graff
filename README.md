@@ -8,3 +8,5 @@ Graff is a rudimentary HTML5 drawing application with basic support for Wacom's 
 
 ## Wacom Web Plugin
 Should be installed by your tablet's drivers. Also obtainable from [Wacom's website](http://www.wacom.com/CustomerCare/Plugin.aspx).
+
+_Graff uses [Font Awesome](http://fortawesome.github.io/Font-Awesome/)._

@@ -24,16 +24,16 @@
         this.y = null;
     }
 
+    var windowHeight = window.innerHeight; // Used in rainbow eval (eval sucks)
+    var windowWidth = window.innerWidth;
     var mouse = new MouseStatus(); // Track mouse status
     var canvas; // Create drawing canvas
-    var inactiveToolStyle = "rgba(0, 0, 0, 0.2)";
-    var activeToolStyle = "rgba(185, 185, 185, 1)";
     var wacomPlugin;
 
 
 
     $(document).ready(function () {
-        $('.defaultTool').css("background-color", activeToolStyle);
+        $('.defaultTool').addClass('activeTool');
         canvas = new Canvas();
         canvas.initCanvas();
         loadWacom();
@@ -90,14 +90,14 @@
 
     // Highlight active tools
     $('#lineStyles .tool').bind('click touchstart', function () {
-        $('#lineStyles .tool').css("background-color", inactiveToolStyle);
-        $(this).css("background-color", activeToolStyle);
+        $('#lineStyles .tool').toggleClass('activeTool', false);
+        $(this).addClass('activeTool');
     });
 
     $('#lineColour .tool').bind('click touchstart', function () {
-        $('#lineColour .tool').css("background-color", inactiveToolStyle);
-        $('#eraseButton').css("background-color", inactiveToolStyle);
-        $(this).css("background-color", activeToolStyle);
+        $('#lineColour .tool').toggleClass('activeTool', false);
+        $('#eraseButton').toggleClass('activeTool', false);
+        $(this).addClass('activeTool');
     });
 
     // Export button
