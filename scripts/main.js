@@ -25,8 +25,6 @@
     }
 
     var mouse = new MouseStatus(); // Track mouse status
-    var windowHeight = window.innerHeight;
-    var windowWidth = window.innerWidth;
     var canvas; // Create drawing canvas
     var inactiveToolStyle = "rgba(0, 0, 0, 0.2)";
     var activeToolStyle = "rgba(185, 185, 185, 1)";
@@ -39,6 +37,10 @@
         canvas = new Canvas();
         canvas.initCanvas();
         loadWacom();
+
+        if (isTouchDevice()) {
+            $('#tools').addClass('touchTool');
+        }
     });
 
     $(window).resize(function () {
@@ -56,9 +58,9 @@
     /*
      * Mouse events
      */
-    $(document).mousemove(function (e) {
-        mouse.x = e.pageX;
-        mouse.y = e.pageY;
+    $(document).bind('mousemove touchmove', function (e) {
+        mouse.x = e.pageX || e.originalEvent.touches[0].pageX;
+        mouse.y = e.pageY || e.originalEvent.touches[0].pageY;
 
         if (mouse.mouseDown) {
             // Wacom webplugin features
@@ -67,41 +69,16 @@
                 var tilt = Math.pow((Math.abs(wacomPlugin.tiltX) + Math.abs(wacomPlugin.tiltY)), 2);
                 canvas.lineWidth = canvas.defaultLineWidth * (pressure * 2 + tilt) * 0.8;
             }
-            canvas.draw(e.pageX, e.pageY);
+            canvas.draw(mouse.x, mouse.y);
         }
     });
 
-    $('#mainCanvas').mousedown(function () {
+    $('#mainCanvas').bind('mousedown touchstart', function () {
         mouse.mouseDown = true;
     });
 
-    $(document).mouseup(function () {
+    $(document).bind('mouseup touchend', function () {
         mouse.mouseDown = false;
-        canvas.lastPos = null; // Reset draw start point
-    });
-
-
-
-    /*
-     * Touch events
-     */
-    $(document).touchmove(function (e) {
-        e.preventDefault();
-        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-        mouse.x = touch.pageX;
-        mouse.y = touch.pageY;
-
-        if (mouse.touchDown) {
-            canvas.draw(touch.pageX, touch.pageY);
-        }
-    });
-
-    $('#mainCanvas').touchstart(function () {
-        mouse.touchDown = true;
-    });
-
-    $(document).touchend(function () {
-        mouse.touchDown = false;
         canvas.lastPos = null; // Reset draw start point
     });
 
@@ -112,24 +89,24 @@
      */
 
     // Highlight active tools
-    $('#lineStyles .tool').click(function () {
+    $('#lineStyles .tool').bind('click touchstart', function () {
         $('#lineStyles .tool').css("background-color", inactiveToolStyle);
         $(this).css("background-color", activeToolStyle);
     });
 
-    $('#lineColour .tool').click(function () {
+    $('#lineColour .tool').bind('click touchstart', function () {
         $('#lineColour .tool').css("background-color", inactiveToolStyle);
         $('#eraseButton').css("background-color", inactiveToolStyle);
         $(this).css("background-color", activeToolStyle);
     });
 
     // Export button
-    $('#exportButton').click(function () {
+    $('#exportButton').bind('click touchstart', function () {
         window.open(canvas.canvas.toDataURL('image/png', ''));
     });
 
     // Map tools to internal option
-    $('.lineStyleOption').click(function () {
+    $('.lineStyleOption').bind('click touchstart', function () {
         var newStyle;
 
         switch ($(this).attr("value")) {
@@ -153,7 +130,7 @@
         canvas.lineStyleOption = newStyle;
     });
 
-    $('.lineColourOption').click(function () {
+    $('.lineColourOption').bind('click touchstart', function () {
         var newColour;
 
         switch ($(this).attr("value")) {
@@ -174,7 +151,7 @@
         canvas.strokeStyleOption = newColour;
     });
 
-    $('.clearOption').click(function () {
+    $('.clearOption').bind('click touchstart', function () {
         canvas.clear();
     });
 
@@ -196,10 +173,6 @@
      * Canvas - The drawing surface.
      */
     function Canvas() {
-        // var canvas;
-        // var context;
-        // var lastPos = null;
-        //this.fillStyle = "#000";
         this.strokeStyleOption = "black"; // Styling the actual line itself
         this.lineStyleOption = "line"; // Type of line to draw
         this.defaultLineWidth = 2.0;
@@ -382,5 +355,9 @@
         }
 
         wacomSupportIndicator();
+    }
+
+    function isTouchDevice() {
+        return !!('ontouchstart' in window);
     }
 })();
